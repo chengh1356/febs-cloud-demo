@@ -22,6 +22,7 @@ public class FebsUserDetailService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         FebsAuthUser user = new FebsAuthUser();
         user.setUsername(username);

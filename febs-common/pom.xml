@@ -3,14 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>cc.mrbird.febs-cloud</groupId>
+        <groupId>cc.mrbird.febs.cloud</groupId>
         <artifactId>febs-cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../febs-cloud/pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
+    <groupId>cc.mrbird</groupId>
     <artifactId>febs-common</artifactId>
     <name>FEBS-Common</name>
+    <version>1.0-SNAPSHOT</version>
     <description>FEBS-Common通用模块</description>
 
     <properties>
