@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "270162a5-7d08-424c-8e5b-3fef6056e091",
+		"name": "FEBS-Cloud-Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FEBS-Auth",
+			"item": [
+				{
+					"name": "密码注册令牌",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZmViczoxMjM0NTY=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8101/oauth/token?grant_type=password&username=febs&password=123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8101",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								},
+								{
+									"key": "username",
+									"value": "febs"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刷新获取令牌",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZmViczoxMjM0NTY=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8101/oauth/token?grant_type=refresh_token&refresh_token=90069785-fe05-4cfb-bbc9-c2b68c11aa95",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8101",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token"
+								},
+								{
+									"key": "refresh_token",
+									"value": "90069785-fe05-4cfb-bbc9-c2b68c11aa95"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer e0c45d57-478d-4aef-9580-7bffd7372f6f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8101/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8101",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取oauth资源测试",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer e0c45d57-478d-4aef-9580-7bffd7372f6f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8101/oauth/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8101",
+							"path": [
+								"oauth",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "注销令牌",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer e0c45d57-478d-4aef-9580-7bffd7372f6f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8101/signout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8101",
+							"path": [
+								"signout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
