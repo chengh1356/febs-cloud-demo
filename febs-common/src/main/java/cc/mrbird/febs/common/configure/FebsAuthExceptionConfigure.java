@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 
 /**
- * @Description
+ * @Description 把异常配置类注入到IOC容器中
  * @Author cgh
  * @Date 2020-06-19 下午 5:26
  */

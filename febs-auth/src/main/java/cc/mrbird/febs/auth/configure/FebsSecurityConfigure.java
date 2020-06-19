@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @Author 54045
  * @Date 2020-06-14 14:34
  */
-@Order(2)
+@Order(2)   //因为http的责任链order为3,所以要优先于http,率先验证
 @EnableWebSecurity
 public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
 

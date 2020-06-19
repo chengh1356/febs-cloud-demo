@@ -11,7 +11,11 @@ import org.springframework.security.oauth2.provider.error.WebResponseExceptionTr
 import org.springframework.stereotype.Component;
 
 /**
- * @Description 异常翻译器
+ * @Description 认证异常翻译器
+ *              1.认证类型异常
+ *              2.认证失效
+ *              3.用户被锁定
+ *              4.用户名或密码错误
  * @Author cgh
  * @Date 2020-06-19 下午 4:39
  */

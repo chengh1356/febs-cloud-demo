@@ -6,14 +6,12 @@ import java.io.OutputStream;
 import java.util.HashMap;
 
 /**
- * @Description
+ * @Description 通用的响应对象
  * @Author 54045
  * @Date 2020-06-17 20:50
  */
 @Data
 public class FebsResponse extends HashMap<String,Object> {
-
-
 
     public FebsResponse message(String message){
         this.put("message",message);

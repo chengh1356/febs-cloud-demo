@@ -56,6 +56,7 @@ public class FebsAuthorizationServerConfigure extends AuthorizationServerConfigu
         FebsClientProperties[] clientsArray = authProperties.getClients();
         InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
         if(ArrayUtils.isNotEmpty(clientsArray)){
+            //匹配所有的用户
             for (FebsClientProperties client:clientsArray){
                 if(StringUtils.isBlank(client.getClient())){
                     throw new Exception("client不能为空");
@@ -64,20 +65,16 @@ public class FebsAuthorizationServerConfigure extends AuthorizationServerConfigu
                     throw new Exception("secret不能为空");
                 }
                 String[] grantTypes = StringUtils.splitByWholeSeparatorPreserveAllTokens(client.getGrantType(),",");
+                //1.客户端从认证服务器获取令牌的时候，必须使用client_id为febs，client_secret为123456的标识来获取
                 builder.withClient(client.getClient())
                         .secret(passwordEncoder.encode(client.getSecret()))
+                        //2.获取令牌的模式为password，并且可以通过refresh_token来获取新的令牌
                         .authorizedGrantTypes(grantTypes)
+                        //3.在获取client_id为febs的令牌的时候，scope只能指定为all，否则将获取失败
                         .scopes(client.getScope());
             }
         }
-        clients.inMemory()
-                //1.客户端从认证服务器获取令牌的时候，必须使用client_id为febs，client_secret为123456的标识来获取
-                .withClient("febs")
-                .secret(passwordEncoder.encode("123456"))
-                //2.获取令牌的模式为password，并且可以通过refresh_token来获取新的令牌
-                .authorizedGrantTypes("password","refresh_token")
-                //3.在获取client_id为febs的令牌的时候，scope只能指定为all，否则将获取失败
-                .scopes("all");
+
     }
     //客户端与服务器配置末端操作
     @Override
@@ -87,6 +84,7 @@ public class FebsAuthorizationServerConfigure extends AuthorizationServerConfigu
                 .userDetailsService(userDetailService)
                 .authenticationManager(authenticationManager)
                 .tokenServices(defaultTokenServices())
+                //添加异常翻译器
                 .exceptionTranslator(exceptionTranslator);
     }
 

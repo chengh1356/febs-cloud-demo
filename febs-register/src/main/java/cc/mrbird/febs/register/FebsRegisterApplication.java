@@ -1,4 +1,4 @@
-package cc.mrbird.febsregister;
+package cc.mrbird.febs.register;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

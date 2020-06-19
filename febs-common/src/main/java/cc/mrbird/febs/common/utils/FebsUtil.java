@@ -13,6 +13,14 @@ import java.io.IOException;
  */
 @Slf4j
 public class FebsUtil {
+    /**
+     * 设置响应
+     * @param response      HttpServletResponse
+     * @param contentType   内容类型
+     * @param status        http状态码
+     * @param value         响应内容
+     * @throws IOException
+     */
     public static void makeResponse(HttpServletResponse response,String contentType,
                                     int status,Object value)throws IOException{
         response.setContentType(contentType);
