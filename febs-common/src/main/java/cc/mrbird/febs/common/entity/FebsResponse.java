@@ -1,5 +1,8 @@
 package cc.mrbird.febs.common.entity;
 
+import lombok.Data;
+
+import java.io.OutputStream;
 import java.util.HashMap;
 
 /**
@@ -7,7 +10,10 @@ import java.util.HashMap;
  * @Author 54045
  * @Date 2020-06-17 20:50
  */
+@Data
 public class FebsResponse extends HashMap<String,Object> {
+
+
 
     public FebsResponse message(String message){
         this.put("message",message);
