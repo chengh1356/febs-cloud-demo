@@ -1,7 +1,9 @@
 package cc.mrbird.febs.auth.configure;
 
+import cc.mrbird.febs.auth.properties.FebsAuthProperties;
 import cc.mrbird.febs.common.handler.FebsAccessDeniedHandler;
 import cc.mrbird.febs.common.handler.FebsAuthExceptionEntryPoint;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,14 +27,20 @@ public class FebsResourceServerConfigure extends ResourceServerConfigurerAdapter
     @Autowired
     private FebsAuthExceptionEntryPoint febsAuthExceptionEntryPoint;
 
+    @Autowired
+    private FebsAuthProperties properties;
+
     @Override
     public void configure(HttpSecurity http) throws Exception{
+        //免认证资源
+        String[] anonUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(properties.getAnonUrl(),",");
         //用于资源的保护,其他资源请求失效
         http.csrf().disable()
                 //对所有请求都生效
                 .requestMatchers().antMatchers("/**")
                 .and()
                 .authorizeRequests()
+                .antMatchers(anonUrls).permitAll()
                 .antMatchers("/**").authenticated();
     }
 

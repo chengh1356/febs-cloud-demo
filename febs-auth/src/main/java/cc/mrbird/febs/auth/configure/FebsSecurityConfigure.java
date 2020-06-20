@@ -1,5 +1,6 @@
 package cc.mrbird.febs.auth.configure;
 
+import cc.mrbird.febs.auth.filter.ValidateCodeFilter;
 import cc.mrbird.febs.auth.service.FebsUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +10,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 /**
  * @Description 安全配置
@@ -25,12 +27,11 @@ public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Autowired
     private FebsUserDetailService userDetailService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        //对于一个相同的密码，每次加密出来的加密串都不同
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private ValidateCodeFilter validateCodeFilter;
 
     @Override
     @Bean
@@ -40,7 +41,9 @@ public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http)throws Exception{
-        http.requestMatchers()
+        //在用户名和密码过滤器前,添加验证码过滤
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .requestMatchers()
                 //只匹配oauth开头的请求
                 .antMatchers("/oauth/**")
             .and()
@@ -53,7 +56,7 @@ public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
-        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder);
     }
 
 

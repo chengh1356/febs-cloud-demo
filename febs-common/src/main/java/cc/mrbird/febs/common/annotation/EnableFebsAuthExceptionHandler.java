@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
- * @Description  认证配置注解
+ * @Description  认证类型异常翻译
  *              1.token无效
  *              2.没有权限访问该资源
  *              注解用以驱动配置类,注入Spring IOC 容器中
